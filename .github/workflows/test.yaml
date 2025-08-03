@@ -14,10 +14,10 @@ jobs:
         # -e CI=true stops it after test is done and dose not wait for inputs
       
       # building the containers 
-      - run: docker build -t abc122/multi-client ./client
-      - run: docker build -t abc122/multi-nginx ./nginx
-      - run: docker build -t abc122/multi-server ./server
-      - run: docker build -t abc122/multi-worker ./worker
+      - run: docker build -t multi-container-test/abc122/multi-client ./client
+      - run: docker build -t multi-container-test/abc122/multi-nginx ./nginx
+      - run: docker build -t multi-container-test/abc122/multi-server ./server
+      - run: docker build -t multi-container-test/abc122/multi-worker ./worker
 
       #login to docker hub
       - name: DockerHub Login
