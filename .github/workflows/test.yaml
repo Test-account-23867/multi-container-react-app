@@ -26,7 +26,7 @@ jobs:
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
         run: echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin 
       # push to docker hub
-      - run: docker push abc122/multi-client
-      - run: docker push abc122/multi-nginx
-      - run: docker push abc122/multi-server
-      - run: docker push abc122/multi-worker
+      - run: docker push multi-container-test/abc122/multi-client
+      - run: docker push multi-container-test/abc122/multi-nginx
+      - run: docker push multi-container-test/abc122/multi-server
+      - run: docker push multi-container-test/abc122/multi-worker
