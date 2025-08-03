@@ -1,0 +1,57 @@
+services:
+  postgres:
+    image: postgres:latest
+    shm_size: 128mb
+    environment:
+      - POSTGRES_PASSWORD=abc
+  redis:
+    image: redis:latest
+  nginx:
+    restart: always
+    depends_on:
+      - api
+      - client
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:80"
+  api:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - REDIS_HOST=redis  # cause you can use a service directly as a ref 
+      - REDIS_PORT=6379   # from docker hub docs for redis
+      - PGUSER=postgres   # default 
+      - PGHOST=postgres  # service name
+      - PGDATABASE=postgres  # default
+      - PGPASSWORD=abc  # theres no default password, you need to set it
+      - PGPORT=5432       # default
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    environment:
+      - WDS_SOCKET_PORT=0
+  worker:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./worker
+    volumes:
+      - /app/node_modules
+      - ./worker:/app
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+# while adding worker service, add 
+    # environment:
+    #   - REDIS_HOST=redis
+    #   - REDIS_PORT=6379

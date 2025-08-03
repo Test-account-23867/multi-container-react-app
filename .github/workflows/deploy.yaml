@@ -1,0 +1,14 @@
+name: deploy-stage
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker run -t abc/react-test -f ../../client/Dockerfile.dev ./client
+      - run: docker run -e CI=true abc/react-test npm run test 
+        # -e CI=true stops it after test is done and dose not wait for inputs
