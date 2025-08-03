@@ -20,7 +20,10 @@ jobs:
       - run: docker build -t abc/multi-worker ./worker
 
       #login to docker hub
-      - echo $DOCKER_HUB_ACCESS_TOKEN | docker login -u $DOCKER_HUB_USERNAME --password-stdin 
+      env:
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - run: echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin 
       # push to docker hub
       - run: docker push abc/multi-client
       - run: docker push abc/multi-nginx
