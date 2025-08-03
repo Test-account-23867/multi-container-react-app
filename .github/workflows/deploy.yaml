@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -t react-test -f ../../client/Dockerfile.dev ./client
+      - run: docker build -t react-test -f ./client/Dockerfile.dev ./client
       - run: docker run -e CI=true react-test npm run test 
         # -e CI=true stops it after test is done and dose not wait for inputs
