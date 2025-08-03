@@ -14,10 +14,10 @@ jobs:
         # -e CI=true stops it after test is done and dose not wait for inputs
       
       # building the containers 
-      - run: docker build -t abc/multi-client ./client
-      - run: docker build -t abc/multi-nginx ./nginx
-      - run: docker build -t abc/multi-server ./server
-      - run: docker build -t abc/multi-worker ./worker
+      - run: docker build -t abc122/multi-client ./client
+      - run: docker build -t abc122/multi-nginx ./nginx
+      - run: docker build -t abc122/multi-server ./server
+      - run: docker build -t abc122/multi-worker ./worker
 
       #login to docker hub
       - name: DockerHub Login
@@ -26,7 +26,7 @@ jobs:
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
         run: echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin 
       # push to docker hub
-      - run: docker push abc/multi-client
-      - run: docker push abc/multi-nginx
-      - run: docker push abc/multi-server
-      - run: docker push abc/multi-worker
+      - run: docker push abc122/multi-client
+      - run: docker push abc122/multi-nginx
+      - run: docker push abc122/multi-server
+      - run: docker push abc122/multi-worker
