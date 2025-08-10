@@ -30,3 +30,18 @@ jobs:
       - run: docker push abc122/multi-container:nginx
       - run: docker push abc122/multi-container:server
       - run: docker push abc122/multi-container:worker
+
+      - name: make a ZIP file
+        run: zip compose-file.zip docker-compose.yaml
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v22
+        with:
+          application_name: multi-container-fib
+          environment_name: Multi-container-fib-env
+          existing_bucket_name: elasticbeanstalk-ap-south-1-241533115304
+          region: ap-south-1
+          version_label: ${{ github.sha }}
+          deployment_package: compose-file.zip
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }} 
