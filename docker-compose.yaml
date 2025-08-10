@@ -4,7 +4,7 @@ services:
     mem_limit: 128m
     hostname: client
   server:
-    image: abc122/multi-comtainer:server
+    image: abc122/multi-container:server
     mem_limit: 128m
     hostname: api  # can also remove this and name server as api, will work the same
     environment:
