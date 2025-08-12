@@ -18,7 +18,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@4
+      - uses: actions/checkout@v4
       # building the containers 
       - run: docker build -t abc122/multi-container:client ./client
       - run: docker build -t abc122/multi-container:nginx ./nginx
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - uses: actions/checkout@4
+      - uses: actions/checkout@v4
 
       - name: make a ZIP file
         run: zip compose-file.zip docker-compose.yaml
